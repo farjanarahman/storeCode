@@ -9,7 +9,9 @@ import RegisterForm from "../pages/Register/Register";
 import About from "../pages/About/About";
 import ContactUs from "../pages/Contact/Contact";
 import ResetPass from "../pages/Login/ResetPass";
-
+import Store from "../pages/Store/Store";
+import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
+import AddProduct from "../pages/AddProduct/AddProduct";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -39,6 +41,18 @@ export const router = createBrowserRouter([
       {
         path: '/contact',
         element: <ContactUs></ContactUs>
+      },
+      {
+        path: '/store',
+        element: <Store></Store>
+      },
+      {
+        path: '/policy',
+        element: <PrivacyPolicy></PrivacyPolicy>
+      },
+      {
+        path: '/addProduct',
+        element: <AddProduct></AddProduct>
       }
 
     ]

@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import useTitle from '../../hooks/useTitle';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
-
+import Swal from 'sweetalert2';
 
 
 const RegisterForm = () => {
@@ -20,14 +20,14 @@ const RegisterForm = () => {
         const password = form.password.value;
 
         console.log(name, storename, email, password);
-            createUser(email, password)
-                .then(result => {
-                    const createdUser = result.user;
-                    console.log(createdUser)
-                })
-                .catch(error => {
-                    console.log(error);
-                }) 
+        createUser(email, password)
+            .then(result => {
+                const createdUser = result.user;
+                console.log(createdUser)
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     return (
@@ -99,7 +99,7 @@ const RegisterForm = () => {
                         SignUp
                     </button>
                 </form>
- 
+
                 <p className='text-center mt-5  mb-5'>Already have an account? <Link to='/login' className='text-blue-700 hover:text-pink-700 hover:underline'>Login</Link></p>
             </div>
         </div>

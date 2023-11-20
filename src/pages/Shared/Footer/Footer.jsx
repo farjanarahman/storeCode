@@ -1,6 +1,7 @@
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 
 const Footer = () => {
@@ -32,7 +33,7 @@ const Footer = () => {
                 </div>
             </nav>
             <aside>
-            <a className="link link-hover hover:text-pink-600">Privacy Policy</a>
+            <a className="link link-hover hover:text-pink-600"><Link to="/policy">Privacy Policy</Link></a>
                 <p>© 2023 All Rights Reserved By StoreCode</p>
             </aside>
         </footer>

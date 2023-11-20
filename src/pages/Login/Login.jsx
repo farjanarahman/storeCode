@@ -77,7 +77,7 @@ const LoginForm = () => {
                         <p className='mt-3 text-right'><Link className='text-blue-700 hover:text-pink-600 hover:underline hover:cursor-pointer' to="/reset_pass">Forgot Password?</Link></p>
                     </div>
                     <button type="submit" className="btn text-white text-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 w-full uppercase rounded-3xl">
-                        SignUp
+                        Login
                     </button>
                     <br />
                 </form>
