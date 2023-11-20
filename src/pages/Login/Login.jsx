@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 import useTitle from '../../hooks/useTitle';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { FaGoogle } from "react-icons/fa";
-import app from '../../firebase/firebase.config';
+// import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+// import { FaGoogle } from "react-icons/fa";
+// import app from '../../firebase/firebase.config';
 
 const LoginForm = () => {
     const { signIn } = useContext(AuthContext);
@@ -12,8 +12,8 @@ const LoginForm = () => {
     const location = useLocation();
     console.log('Login page location', location)
     const from = location.state?.from?.pathname || '/';
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider()
+    // const auth = getAuth(app);
+    // const provider = new GoogleAuthProvider()
 
     useTitle('Login');
 
@@ -34,58 +34,60 @@ const LoginForm = () => {
                 console.log(error);
             });
     };
-    const handleGoogleSignIn = () => {
-        signInWithPopup(auth, provider)
-            .then(result => {
-                const user = result.user;
-                console.log(user);
-                navigate(from, { replace: true })
-            })
-            .catch(error => {
-                console.log(error.message);
-            })
-    }
+    // const handleGoogleSignIn = () => {
+    //     signInWithPopup(auth, provider)
+    //         .then(result => {
+    //             const user = result.user;
+    //             console.log(user);
+    //             navigate(from, { replace: true })
+    //         })
+    //         .catch(error => {
+    //             console.log(error.message);
+    //         })
+    // }
 
     return (
-        <div className="max-w-md mx-auto rounded-lg shadow-lg py-8 px-10 bg-violet-300">
-            <h2 className="text-center text-2xl font-bold mb-4 text-gray-800">Please Login</h2>
-            <form onSubmit={handleLogin} className="space-y-4 ">
-                <div className="form-control">
-                    <label htmlFor="email" className="label text-gray-700">
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        id="email"
-                        className="input input-bordered"
-                        placeholder="Enter your email"
-                        required
-                    />
+        <div className="bg-[url('/public/Banner.jpg')] bg-no-repeat bg-cover p-10">
+            <div className="max-w-md mx-auto bg-white rounded-md px-10 py-16">
+                <h2 className="text-center text-5xl font-bold mb-4 pb-5">Login</h2>
+                <form onSubmit={handleLogin} className="space-y-4 ">
+                    <div className="form-control">
+                        <label htmlFor="email" className="label text-gray-700">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            className="input input-bordered"
+                            placeholder="Enter your email"
+                            required
+                        />
+                    </div>
+                    <div className="form-control">
+                        <label htmlFor="password" className="label text-gray-700">
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            className="input input-bordered"
+                            placeholder="Enter your password"
+                            required
+                        />
+                        <p className='mt-3 text-right'><Link className='text-blue-700 hover:text-pink-600 hover:underline hover:cursor-pointer' to="/reset_pass">Forgot Password?</Link></p>
+                    </div>
+                    <button type="submit" className="btn text-white text-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 w-full uppercase rounded-3xl">
+                        SignUp
+                    </button>
+                    <br />
+                </form>
+                <div className="flex justify-center">
+                    {/* <button className='btn bg-red-500 hover:bg-red-600 mx-auto mt-5' onClick={handleGoogleSignIn}>
+                        <FaGoogle className='text-center mx-auto'></FaGoogle>
+                    </button> */}
                 </div>
-                <div className="form-control">
-                    <label htmlFor="password" className="label text-gray-700">
-                        Password
-                    </label>
-                    <input
-                        type="password"
-                        id="password"
-                        className="input input-bordered"
-                        placeholder="Enter your password"
-                        required
-                    />
-                </div>
-
-                <button type="submit" className="btn btn-primary w-full">
-                    Login
-                </button>
-                <br />
-            </form>
-            <div className="flex justify-center">
-                <button className='btn bg-red-500 hover:bg-red-600 mx-auto mt-5' onClick={handleGoogleSignIn}>
-                    <FaGoogle className='text-center mx-auto'></FaGoogle>
-                </button>
+                <p className='text-center mt-5 text-gray-700'>Don't have an account? <Link to='/register' className='text-blue-700 hover:text-pink-600 hover:underline'>Register</Link></p>
             </div>
-            <p className='text-center mt-5 text-gray-700'>Don't have an account? <Link to='/register' className='text-blue-700'>Register</Link></p>
         </div>
     );
 };

@@ -8,6 +8,7 @@ import LoginForm from "../pages/Login/Login";
 import RegisterForm from "../pages/Register/Register";
 import About from "../pages/About/About";
 import ContactUs from "../pages/Contact/Contact";
+import ResetPass from "../pages/Login/ResetPass";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: '/register',
         element: <RegisterForm></RegisterForm>
+      },
+      {
+        path: '/reset_pass',
+        element: <ResetPass></ResetPass>
       },
       {
         path: '/about',

@@ -100,7 +100,7 @@ const RegisterForm = () => {
                     </button>
                 </form>
  
-                <p className='text-center mt-5  mb-5'>Already have an account? <Link to='/login' className='text-blue-700'>Login</Link></p>
+                <p className='text-center mt-5  mb-5'>Already have an account? <Link to='/login' className='text-blue-700 hover:text-pink-700 hover:underline'>Login</Link></p>
             </div>
         </div>
     );
