@@ -12,6 +12,11 @@ import ResetPass from "../pages/Login/ResetPass";
 import Store from "../pages/Store/Store";
 import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
 import AddProduct from "../pages/AddProduct/AddProduct";
+import Profile from "../pages/Profile/Profile";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import PrivateRoute from "./PrivateRoute";
+
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -52,7 +57,16 @@ export const router = createBrowserRouter([
       },
       {
         path: '/addProduct',
-        element: <AddProduct></AddProduct>
+        element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
+      },
+      {
+        path: '/profile',
+        element: <Profile></Profile>
+      },
+      {
+        path: '/dashboard',
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        loader: () => fetch('http://localhost:5000/addproduct')
       }
 
     ]
