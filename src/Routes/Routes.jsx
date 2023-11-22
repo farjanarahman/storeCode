@@ -66,7 +66,7 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-        loader: () => fetch('http://localhost:5000/addproduct')
+        loader: () => fetch('https://storecode-server.vercel.app/addproduct')
       }
 
     ]

@@ -1,29 +1,53 @@
 import { useContext, useEffect, useState } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaTrash } from 'react-icons/fa';
 import { AuthContext } from '../../providers/AuthProvider';
 
-const generateRandomCode = (name) => {
-    // Ensure the name is defined and at least 3 characters long
+// const generateRandomCode = (name) => {
+//     // Ensure the name is defined and at least 3 characters long
+//     if (name && name.length >= 3) {
+//       // Slice the first three letters of the name and convert to uppercase
+//       const truncatedName = name.slice(0, 3).toUpperCase();
+
+//       // Generate a random string of three numbers
+//       const randomNumberString = Math.floor(Math.random() * 900) + 100;
+
+//       return truncatedName + randomNumberString;
+//     } else {
+//       // Handle the case where name is undefined or too short
+//       return "N/A"; // Or any default value you want
+//     }
+//   };
+
+// const generateConstantCode = (name) => {
+//     if (name && name.length >= 3) {
+//       // Hash the product name to generate a constant code
+//       const hashCode = name
+//         .split('')
+//         .reduce((hash, char) => (hash << 5) - hash + char.charCodeAt(0), 0);
+
+//       return Math.abs(hashCode).toString().slice(0, 3).toUpperCase();
+//     } else {
+//       return "N/A";
+//     }
+//   };
+
+const generateConstantCode = (name, counter) => {
     if (name && name.length >= 3) {
-      // Slice the first three letters of the name and convert to uppercase
-      const truncatedName = name.slice(0, 3).toUpperCase();
+        const truncatedName = name.slice(0, 3).toUpperCase();
+        const paddedCounter = counter.toString().padStart(3, '0');
 
-      // Generate a random string of three numbers
-      const randomNumberString = Math.floor(Math.random() * 900) + 100;
-
-      return truncatedName + randomNumberString;
+        return truncatedName + paddedCounter;
     } else {
-      // Handle the case where name is undefined or too short
-      return "N/A"; // Or any default value you want
+        return "N/A";
     }
-  };
+};
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
     const [products, setProducts] = useState([]);
+    const [codesGenerated, setCodesGenerated] = useState(false);
 
-    const length = useLoaderData();
 
     const [counter, setCounter] = useState(101); // Starting from 102
 
@@ -31,15 +55,46 @@ const Dashboard = () => {
         setCounter((prevCounter) => prevCounter + 1);
     };
 
+    // useEffect(() => {
+    //     // fetch(`http://localhost:5000/dashboard/${user?.email}`)
+    //     fetch(`https://storecode-server.vercel.app/allproducts?email=${user?.email}`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data);
+    //             setProducts(data);
+    //         });
+    // }, [user]);
+
+    // useEffect(() => {
+    //     if (!codesGenerated) {
+    //       fetch(`https://storecode-server.vercel.app/allproducts?email=${user?.email}`)
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //           console.log(data);
+    //           const productsWithCodes = data.map((product) => ({
+    //             ...product,
+    //             code: generateConstantCode(product.name),
+    //           }));
+    //           setProducts(productsWithCodes);
+    //           setCodesGenerated(true);
+    //         });
+    //     }
+    //   }, [user, codesGenerated]);
     useEffect(() => {
-        // fetch(`http://localhost:5000/dashboard/${user?.email}`)
-        fetch(`http://localhost:5000/allproducts?email=${user?.email}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setProducts(data);
-            });
-    }, [user]);
+        if (!codesGenerated) {
+            fetch(`http://localhost:5000/allproducts?email=${user?.email}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    const productsWithCodes = data.map((product, index) => ({
+                        ...product,
+                        code: generateConstantCode(product.name, counter + index),
+                    }));
+                    setProducts(productsWithCodes);
+                    setCodesGenerated(true);
+                });
+        }
+    }, [user, codesGenerated, counter]);
 
     const handleDelete = (id) => {
         const proceed = window.confirm("Are you sure you want to delete?");
@@ -82,7 +137,7 @@ const Dashboard = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {products.map((product, index) => (
+                    {/* {products.map((product, index) => (
                         <tr className='bg-pink-100' key={index}>
                             <td>{counter + index}</td>
                             <td>{product?.name}</td>
@@ -92,15 +147,28 @@ const Dashboard = () => {
                                 <button onClick={() => handleDelete(product?._id)} className="btn btn-error"><FaTrash /></button>
                             </td>
                         </tr>
+                    ))} */}
+                    {products.map((product, index) => (
+                        <tr className='bg-pink-100' key={index}>
+                            <td>{counter + index}</td>
+                            <td>{product?.name}</td>
+                            <td>{product?.email}</td>
+                            <td>{product?.code}</td>
+                            <td>
+                                <button onClick={() => handleDelete(product?._id)} className="btn btn-error"><FaTrash /></button>
+                            </td>
+                        </tr>
                     ))}
+
                 </tbody>
             </table>
             <button type="submit" className="ms-5 btn mt-5 mx-auto text-white text-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 uppercase rounded-2xl">
-            <Link to='/addProduct'>Add Product</Link>
-          </button>
+                <Link to='/addProduct'>Add Product</Link>
+            </button>
         </div>
     );
 };
 
 export default Dashboard;
+
 

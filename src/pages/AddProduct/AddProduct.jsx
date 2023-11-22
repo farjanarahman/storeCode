@@ -16,7 +16,7 @@ const AddProduct = () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)  //product
+      body: JSON.stringify(data)
     })
       .then(res => res.json())
       .then(data => {
@@ -60,7 +60,7 @@ const AddProduct = () => {
               required
             />
           </div>
-          <div className="form-control">
+          {/* <div className="form-control">
             <label htmlFor="pictureUrl" className="label">
               Picture URL
             </label>
@@ -72,7 +72,7 @@ const AddProduct = () => {
               placeholder="Enter the picture URL of the toy"
               required
             />
-          </div>
+          </div> */}
           <div className="form-control">
             <label htmlFor="email" className="label">
               Your Email
