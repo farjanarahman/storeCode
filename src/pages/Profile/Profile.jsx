@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { CgProfile } from "react-icons/cg";
 
-
 const Profile = () => {
     return (
         <div className="bg-[url('/public/Banner.jpg')] bg-no-repeat bg-cover p-10">
@@ -9,11 +8,11 @@ const Profile = () => {
                 <h2 className="text-center text-4xl font-bold mb-4">Account</h2>
                 <CgProfile className='mt-10 mx-auto text-slate-500 text-8xl'/>
                 <input type="file" className="mx-auto file-input file-input-ghost w-full max-w-xs" />
-                <button type="submit" className="btn text-white text-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 w-full uppercase rounded-3xl">
+                <button type="submit" className="btn mt-5 text-white text-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 w-full uppercase rounded-3xl">
                         Upload
                     </button>
                 <form className="space-y-4">
-                    <div className="form-control">
+                    <div className="mt-5 form-control">
                         <label htmlFor="name" className="label">
                             Name
                         </label>
@@ -51,7 +50,7 @@ const Profile = () => {
                     </div>
                     <div className="form-control">
                         <label htmlFor="number" className="label">
-                            Number
+                            Mobile
                         </label>
                         <input
                             type="number"
@@ -62,17 +61,30 @@ const Profile = () => {
                         />
                     </div>
                     <div className="form-control">
-                        <label htmlFor="password" className="label">
-                            Password
+                        <label htmlFor="link" className="label">
+                            Instagram Link
                         </label>
                         <input
-                            type="password"
-                            id="password"
+                            type="link"
+                            id="link"
                             className="input input-bordered"
-                            placeholder="Enter your password"
+                            placeholder="Instagram ID link"
                             required
                         />
                     </div>
+                    <div className="form-control">
+                        <label htmlFor="link" className="label">
+                            YouTube Channel Link
+                        </label>
+                        <input
+                            type="link"
+                            id="link"
+                            className="input input-bordered"
+                            placeholder="YouTube Channel Link"
+                            required
+                        />
+                    </div>
+                    
                     <button type="submit" className="btn text-white text-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 w-full uppercase rounded-3xl">
                         SignUp
                     </button>

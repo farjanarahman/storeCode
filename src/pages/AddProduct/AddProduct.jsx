@@ -56,6 +56,7 @@ const AddProduct = () => {
               id="name"
               className="input input-bordered"
               placeholder="Product Name"
+              {...register("name")}
               required
             />
           </div>
@@ -74,7 +75,7 @@ const AddProduct = () => {
           </div>
           <div className="form-control">
             <label htmlFor="email" className="label">
-              Seller Email
+              Your Email
             </label>
             <input
               type="email"
@@ -94,7 +95,7 @@ const AddProduct = () => {
               type="text"
               id="productLink"
               className="input input-bordered"
-              {...register("link")}
+              {...register("productLink")}
               placeholder="Product Link"
               required
             />
